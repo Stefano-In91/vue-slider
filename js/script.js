@@ -37,5 +37,19 @@ createApp({
     activeOnClick(index) {
       this.currentActive = index;
     },
+    nextSlide() {
+      if (this.currentActive < this.slides.length - 1) {
+        this.currentActive++;
+      } else {
+        this.currentActive = 0;
+      }
+    },
+    prevSlide() {
+      if (this.currentActive === 0) {
+        this.currentActive = this.slides.length - 1;
+      } else {
+        this.currentActive--;
+      }
+    },
   },
 }).mount("#app");
