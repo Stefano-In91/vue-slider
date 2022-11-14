@@ -33,5 +33,9 @@ createApp({
       ],
     };
   },
-  methods() {},
+  methods: {
+    activeOnClick(index) {
+      this.currentActive = index;
+    },
+  },
 }).mount("#app");
