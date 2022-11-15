@@ -3,7 +3,9 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      currentActive: 0,
+      currentIndex: 0,
+      // Inizializzazione variabile autoplay
+      autoplay: null,
       slides: [
         {
           image: "img/01.webp",
@@ -35,21 +37,38 @@ createApp({
   },
   methods: {
     activeOnClick(index) {
-      this.currentActive = index;
+      this.currentIndex = index;
     },
     nextSlide() {
-      if (this.currentActive < this.slides.length - 1) {
-        this.currentActive++;
+      if (this.currentIndex < this.slides.length - 1) {
+        this.currentIndex++;
       } else {
-        this.currentActive = 0;
+        this.currentIndex = 0;
       }
     },
     prevSlide() {
-      if (this.currentActive === 0) {
-        this.currentActive = this.slides.length - 1;
+      if (this.currentIndex === 0) {
+        this.currentIndex = this.slides.length - 1;
       } else {
-        this.currentActive--;
+        this.currentIndex--;
       }
     },
+    startAutoplay() {
+      this.autoplay = setInterval(() => {
+        this.nextSlide();
+      }, 3000);
+    },
+    stopAutoplay() {
+      clearInterval(this.autoplay);
+    },
+  },
+  // Hook
+  mounted() {
+    // const self = this;
+    // setInterval(function () {
+    //   self.nextSlide();
+    // }, 3000);
+    // Inizializzazione autoplay all'Hook
+    this.startAutoplay();
   },
 }).mount("#app");
